@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Moon, Sun, Bell } from 'lucide-react';
+import { Moon, Sun, Bell, Menu } from 'lucide-react';
 import useAuthStore from '../store/useAuthStore';
 import { supabase } from '../lib/supabase';
 
-const Topbar = () => {
+const Topbar = ({ toggleSidebar }) => {
   const { profile, role } = useAuthStore();
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [notifications, setNotifications] = useState([]);
@@ -55,7 +55,9 @@ const Topbar = () => {
   return (
     <header className="topbar">
       <div className="topbar-search">
-        {/* Placeholder for future global search */}
+        <button className="icon-btn mobile-menu-btn" onClick={toggleSidebar} aria-label="Menu">
+          <Menu size={24} />
+        </button>
       </div>
       
       <div className="topbar-actions">

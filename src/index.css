@@ -189,3 +189,52 @@ button {
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
+
+/* Responsividad General Módulos Base */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem;
+  }
+  
+  h1 { font-size: 1.5rem !important; }
+  h2 { font-size: 1.25rem !important; }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    justify-content: center;
+  }
+  
+  .courses-grid, .stats-grid, .modules-grid, .users-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .welcome-banner {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 1.5rem !important;
+  }
+  
+  .user-avatar-large {
+    margin-bottom: 1rem;
+    width: 80px;
+    height: 80px;
+  }
+
+  .catalog-filters {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

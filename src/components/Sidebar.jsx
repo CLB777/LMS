@@ -4,7 +4,7 @@ import useAuthStore from '../store/useAuthStore';
 import { Home, BookOpen, GraduationCap, Users, LogOut, FileText, MessageSquare } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
-const Sidebar = () => {
+const Sidebar = ({ mobileOpen, setMobileOpen }) => {
   const { role, setSession } = useAuthStore();
 
   const handleLogout = async () => {
@@ -13,20 +13,22 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="sidebar">
+    <>
+    <div className={`sidebar-overlay ${mobileOpen ? 'open' : ''}`} onClick={() => setMobileOpen(false)}></div>
+    <aside className={`sidebar ${mobileOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
         <GraduationCap className="logo-icon" size={32} />
         <h2>Sistema Escolar React</h2>
       </div>
 
       <nav className="sidebar-nav">
-        <NavLink to="/dashboard" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+        <NavLink to="/dashboard" onClick={() => setMobileOpen(false)} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <Home size={20} />
           <span>Inicio</span>
         </NavLink>
 
         {(role === 'Docente' || role === 'Admin') && (
-          <NavLink to="/cursos" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+          <NavLink to="/cursos" onClick={() => setMobileOpen(false)} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
             <BookOpen size={20} />
             <span>Mis Cursos</span>
           </NavLink>
@@ -34,11 +36,11 @@ const Sidebar = () => {
 
         {role === 'Estudiante' && (
           <>
-            <NavLink to="/catalogo" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+            <NavLink to="/catalogo" onClick={() => setMobileOpen(false)} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
               <BookOpen size={20} />
               <span>Catálogo</span>
             </NavLink>
-            <NavLink to="/calificaciones" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+            <NavLink to="/calificaciones" onClick={() => setMobileOpen(false)} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
               <FileText size={20} />
               <span>Calificaciones</span>
             </NavLink>
@@ -46,13 +48,13 @@ const Sidebar = () => {
         )}
 
         {role === 'Admin' && (
-          <NavLink to="/usuarios" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+          <NavLink to="/usuarios" onClick={() => setMobileOpen(false)} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
             <Users size={20} />
             <span>Usuarios</span>
           </NavLink>
         )}
 
-        <NavLink to="/foros" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+        <NavLink to="/foros" onClick={() => setMobileOpen(false)} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <MessageSquare size={20} />
           <span>Foros</span>
         </NavLink>
@@ -65,6 +67,7 @@ const Sidebar = () => {
         </button>
       </div>
     </aside>
+    </>
   );
 };
 
